@@ -1,0 +1,2 @@
+myflag = False
+print(myflag)

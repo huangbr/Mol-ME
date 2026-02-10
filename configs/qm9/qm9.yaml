@@ -1,0 +1,77 @@
+OUTPUT_DIR: './test/qm9'
+TAG: 'default'
+SEED: 2022
+NUM_FOLDS: 10
+HYPER: True
+HYPER_REMOVE: None
+NUM_ITERS: 30
+
+
+DATA:
+  BATCH_SIZE: 32
+  DATASET: 'qm9'
+  DATA_PATH: './data/qm9/'
+  TASK_TYPE: 'regression'
+  METRIC: 'mae'
+  SPLIT_TYPE: 'random'  # scaffold、random
+  AUG_FACTOR: 1
+
+
+MODEL:
+  GNN:
+    HID_DIM: 384
+    OUT_DIM: None
+    DEPTH: 4
+    DROPOUT: 0.3
+    F_ATT: True
+    BRICS: True
+    SLICES: 1
+    R: 4
+
+  SEQ:
+    OUT_DIM: 768
+
+  ATT:
+    NUM_HEADS: 8
+    DROPOUT: 0.2
+
+
+LOSS:
+  FL_LOSS: False
+  CL_LOSS: False
+  ALPHA: 0.1
+  TEMPERATURE: 0.1
+
+
+TRAIN:
+  EARLY_STOP: 20
+  MAX_EPOCHS: 100
+
+  # optimizer
+  OPTIMIZER:
+    TYPE: 'adam'
+    # Learning rate
+    BASE_LR: 5e-4
+    # FPN Learning rate
+    FP_LR: 4e-5
+    # SGD momentum
+    MOMENTUM: 0.9
+    # Weight decay
+    WEIGHT_DECAY: 1e-4
+
+  # LR scheduler
+  LR_SCHEDULER:
+    TYPE: 'reduce'
+    # NoamLR parameters
+    WARMUP_EPOCHS: 2.0
+    INIT_LR: 1e-4
+    MAX_LR: 1e-2
+    FINAL_LR: 1e-4
+
+    # ReduceLRonPlateau
+    FACTOR: 0.5
+    PATIENCE: 10
+    MIN_LR: 1e-5
+
+  RESUME: None
+
