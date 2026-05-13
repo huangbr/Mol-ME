@@ -10,9 +10,13 @@ This repository contains the official implementation of **Mol-ME**, a novel mult
 It achieves state-of-the-art performance on 9 MoleculeNet benchmark datasets.
 
 ## Quick Start
-To train and evaluate Mol-ME on the BBBP dataset with seed 2022 using GPU 1:
+1. Run multi-seed evaluation:
 ```
-python source/train.py --cfg ./configs/bbbp/bbbp.yaml --opts SEED 2022 --tag seed_2022 --gpu 1
+bash run.sh
+```
+2. Or manually specify the seed for individual evaluation via command line:
+```
+python source/train.py --cfg ./configs/sider/sider.yaml --opts SEED 2022 --tag seed_2022 --gpu 1
 ```
 
 ## Supported Datasets
