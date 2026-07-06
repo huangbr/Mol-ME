@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: train", // 对应 PyCharm 的 Name
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/source/train.py", // 表示运行当前打开的文件，或者改为："/home/server/source/train.py" (服务器上的绝对路径)
+            "console": "integratedTerminal",
+            "args": [
+                "--cfg", "./configs/hiv/hiv.yaml",
+                "--opts", "SEED", "2023",
+                "--tag", "seed_2023",
+                "--gpu", "0"
+            ],
+            "justMyCode": true
+        }
+    ]
+}
