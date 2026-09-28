@@ -21,6 +21,8 @@ _C.OUTPUT_DIR = ""
 _C.TAG = 'default'
 # Fixed random seed
 _C.SEED = 1
+# Dataset split type: 'Random' or 'Scaffold' (falls back to Random)
+_C.SPLIT_TYPE = 'Random'
 # Number of folds to run
 _C.NUM_FOLDS = 10
 # Whether to show individual scores for each task

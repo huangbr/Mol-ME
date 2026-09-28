@@ -812,21 +812,22 @@ def build_dataset(cfg, logger):
     cfg.merge_from_list(opts)
     cfg.freeze()
 
-    # train_dataset, valid_dataset, test_dataset = load_dataset_random(cfg.DATA.DATA_PATH,
-    #                                                                  cfg.DATA.DATASET,
-    #                                                                  cfg.SEED,
-    #                                                                  cfg.DATA.TASK_TYPE,
-    #                                                                  cfg.DATA.TASK_NAME,
-    #                                                                  cfg.DATA.AUG_FACTOR,
-    #                                                                  logger)
+    split_type = str(getattr(cfg, 'SPLIT_TYPE', 'Random') or 'Random').strip().lower()
+    if split_type == 'scaffold':
+        load_fn = load_dataset_scaffold
+    else:
+        if split_type != 'random':
+            logger.info(f'Unknown SPLIT_TYPE {cfg.SPLIT_TYPE!r}, falling back to Random')
+        load_fn = load_dataset_random
+    logger.info(f'Dataset split type: {load_fn.__name__}')
 
-    train_dataset, valid_dataset, test_dataset = load_dataset_scaffold(cfg.DATA.DATA_PATH,
-                                                                       cfg.DATA.DATASET,
-                                                                       cfg.SEED,
-                                                                       cfg.DATA.TASK_TYPE,
-                                                                       cfg.DATA.TASK_NAME,
-                                                                       cfg.DATA.AUG_FACTOR,
-                                                                       logger)
+    train_dataset, valid_dataset, test_dataset = load_fn(cfg.DATA.DATA_PATH,
+                                                         cfg.DATA.DATASET,
+                                                         cfg.SEED,
+                                                         cfg.DATA.TASK_TYPE,
+                                                         cfg.DATA.TASK_NAME,
+                                                         cfg.DATA.AUG_FACTOR,
+                                                         logger)
 
     return train_dataset, valid_dataset, test_dataset
 

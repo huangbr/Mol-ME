@@ -1,6 +1,7 @@
 OUTPUT_DIR: './test/sider'
 TAG: 'default'
 SEED: 2030
+SPLIT_TYPE: 'Scaffold'
 NUM_FOLDS: 10
 HYPER: True
 HYPER_REMOVE: None
